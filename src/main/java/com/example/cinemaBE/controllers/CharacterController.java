@@ -2,7 +2,7 @@ package com.example.cinemaBE.controllers;
 
 
 import com.example.cinemaBE.domains.Character;
-import com.example.cinemaBE.domains.CharacterKey;
+import com.example.cinemaBE.domains.Director;
 import com.example.cinemaBE.services.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,11 +38,11 @@ public class CharacterController {
         characterService.saveCharacter(character);
     }
 
-    @PutMapping("/{actorId}/{movieId}")
-    public ResponseEntity<?> update(@RequestBody Character character, @PathVariable int actorId, @PathVariable int movieId) {
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@RequestBody Character character, @PathVariable int id) {
         try {
-            CharacterKey key = new CharacterKey(actorId, movieId);
-            character.setKey(key);
+            Character existCharacter = characterService.getCharacter(id);
+            character.setId(id);
             characterService.saveCharacter(character);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NoSuchElementException e) {
