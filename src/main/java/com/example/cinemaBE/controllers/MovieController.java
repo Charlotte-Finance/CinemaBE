@@ -21,6 +21,16 @@ public class MovieController {
         return movieService.listAllMovie();
     }
 
+    @GetMapping("/category/{categoryCode}")
+    public List<Movie> listByCategory(@PathVariable String categoryCode) {
+        return movieService.listMoviesByCategory(categoryCode);
+    }
+
+    @GetMapping("/liked/{userId}")
+    public List<Movie> listByCategory(@PathVariable int userId) {
+        return movieService.listMoviesByLike(userId);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Movie> get(@PathVariable Integer id) {
         try {
