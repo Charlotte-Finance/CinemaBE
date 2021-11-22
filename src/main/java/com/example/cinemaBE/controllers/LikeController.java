@@ -32,11 +32,10 @@ public class LikeController {
         }
     }
 
-    @PostMapping("/is-liked")
-    public boolean isLiked(@RequestBody Map<String, String> likeData) {
+    @GetMapping("/is_liked")
+    public boolean isLiked(@RequestParam Integer userId, @RequestParam Integer movieId) {
         try {
-            int userId = Integer.parseInt(likeData.get("user_id"));
-            int movieId = Integer.parseInt(likeData.get("movie_id"));
+
             Like like = likeService.getLikeByUserAndMovie(userId, movieId);
             System.out.println(like);
             return like != null;
