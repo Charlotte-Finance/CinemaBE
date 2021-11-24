@@ -35,7 +35,7 @@ public class LikeService {
         return likeRepository.findByUserIdAndMovieId(user_id, movie_id);
     }
 
-    public Like changeLike(int user_id, int movie_id, boolean isLiked) {
+    public Like changeLike(int user_id, int movie_id) {
         Like like = likeRepository.findByUserIdAndMovieId(user_id, movie_id);
         if (like == null) {
             Like newLike = new Like(user_id, movie_id);

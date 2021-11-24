@@ -22,10 +22,10 @@ public class CategoryController {
         return categoryService.listAllCategory();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Category> get(@PathVariable Integer id) {
+    @GetMapping("/{code}")
+    public ResponseEntity<Category> get(@PathVariable String code) {
         try {
-            Category category = categoryService.getCategory(id);
+            Category category = categoryService.getCategory(code);
             return new ResponseEntity<>(category, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -49,7 +49,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        categoryService.deleteCategory(id);
+    public void delete(@PathVariable String code) {
+        categoryService.deleteCategory(code);
     }
 }

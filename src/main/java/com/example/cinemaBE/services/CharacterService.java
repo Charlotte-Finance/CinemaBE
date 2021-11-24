@@ -29,4 +29,9 @@ public class CharacterService {
     public void deleteCharacter(Integer id) {
         characterRepository.deleteById(id);
     }
+
+    public List<Character> getCharactersByMovie(Integer movieId) {
+        return characterRepository.findByMovieId(movieId);
+    }
+
 }

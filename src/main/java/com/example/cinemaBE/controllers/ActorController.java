@@ -31,6 +31,16 @@ public class ActorController {
         }
     }
 
+    @GetMapping("/by-movie")
+    public ResponseEntity<List<Actor>> byMovie(@RequestParam Integer movieId) {
+        try {
+            List<Actor> actors = actorService.getActorsByMovieId(movieId);
+            return new ResponseEntity<>(actors, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping("/")
     public void add(@RequestBody Actor actor) {
         actorService.saveActor(actor);

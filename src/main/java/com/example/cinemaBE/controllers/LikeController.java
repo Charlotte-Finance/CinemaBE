@@ -13,6 +13,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/likes")
+
 public class LikeController {
     @Autowired
     LikeService likeService;
@@ -35,26 +36,20 @@ public class LikeController {
     @GetMapping("/is_liked")
     public boolean isLiked(@RequestParam Integer userId, @RequestParam Integer movieId) {
         try {
-
             Like like = likeService.getLikeByUserAndMovie(userId, movieId);
-            System.out.println(like);
             return like != null;
         } catch (NoSuchElementException e) {
             return false;
         }
     }
 
-    @PostMapping("/change-like")
-    public ResponseEntity<Like> changeLike(@RequestBody Map<String, String> likeData) {
+    @GetMapping("/change-like")
+    public boolean changeLike(@RequestParam int userId, @RequestParam int movieId) {
         try {
-            int userId = Integer.parseInt(likeData.get("user_id"));
-            int movieId = Integer.parseInt(likeData.get("movie_id"));
-            Boolean isLiked = Boolean.parseBoolean(likeData.get("is_liked"));
-            Like like = likeService.changeLike(userId, movieId, isLiked);
-            System.out.println(like);
-            return new ResponseEntity<>(like, HttpStatus.OK);
+            Like like = likeService.changeLike(userId, movieId);
+            return like != null;
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return false;
         }
     }
 

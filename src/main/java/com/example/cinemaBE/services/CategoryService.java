@@ -1,6 +1,7 @@
 package com.example.cinemaBE.services;
 
 import com.example.cinemaBE.domains.Category;
+import com.example.cinemaBE.domains.Character;
 import com.example.cinemaBE.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,12 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
-    public Category getCategory(Integer id) {
-        return categoryRepository.findById(id).get();
+    public Category getCategory(String code) {
+        return categoryRepository.findById(code).get();
     }
 
-    public void deleteCategory(Integer id) {
-        categoryRepository.deleteById(id);
+    public void deleteCategory(String code) {
+        categoryRepository.deleteById(code);
     }
+
 }
