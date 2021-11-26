@@ -1,5 +1,6 @@
 package com.example.cinemaBE.controllers;
 
+import com.example.cinemaBE.domains.Like;
 import com.example.cinemaBE.domains.Movie;
 import com.example.cinemaBE.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,13 @@ public class MovieController {
     }
 
     @PostMapping("/")
-    public void add(@RequestBody Movie movie) {
-        movieService.saveMovie(movie);
+    public ResponseEntity<Movie> add(@RequestBody Movie movie) {
+        try {
+            Movie postMovie = movieService.saveMovie(movie);
+            return new ResponseEntity<>(postMovie, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/{id}")

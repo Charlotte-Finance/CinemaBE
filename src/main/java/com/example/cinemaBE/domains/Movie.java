@@ -9,7 +9,7 @@ public class Movie {
     private int id;
     private String title;
     private int duration;
-    private Date release;
+    private Date releaseDate;
     private int budget;
     private int revenue;
     private int directorId;
@@ -45,12 +45,12 @@ public class Movie {
     }
 
     @Basic
-    public Date getRelease() {
-        return release;
+    public Date getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setRelease(Date release) {
-        this.release = release;
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     @Basic

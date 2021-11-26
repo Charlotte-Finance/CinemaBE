@@ -1,6 +1,7 @@
 package com.example.cinemaBE.controllers;
 
 
+import com.example.cinemaBE.domains.Actor;
 import com.example.cinemaBE.domains.Category;
 import com.example.cinemaBE.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,13 @@ public class CategoryController {
     }
 
     @PostMapping("/")
-    public void add(@RequestBody Category category) {
-        categoryService.saveCategory(category);
+    public ResponseEntity<Category> add(@RequestBody Category category) {
+        try {
+            categoryService.saveCategory(category);
+            return new ResponseEntity<>(category, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/{code}")

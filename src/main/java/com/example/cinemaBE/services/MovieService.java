@@ -37,8 +37,8 @@ public class MovieService {
         return movies;
     }
 
-    public void saveMovie(Movie movie) {
-        movieRepository.save(movie);
+    public Movie saveMovie(Movie movie) {
+        return movieRepository.save(movie);
     }
 
     public Movie getMovie(Integer id) {

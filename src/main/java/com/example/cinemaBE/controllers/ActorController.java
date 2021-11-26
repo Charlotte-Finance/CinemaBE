@@ -1,6 +1,7 @@
 package com.example.cinemaBE.controllers;
 
 import com.example.cinemaBE.domains.Actor;
+import com.example.cinemaBE.domains.Character;
 import com.example.cinemaBE.services.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,8 +43,13 @@ public class ActorController {
     }
 
     @PostMapping("/")
-    public void add(@RequestBody Actor actor) {
-        actorService.saveActor(actor);
+    public ResponseEntity<Actor> add(@RequestBody Actor actor) {
+        try {
+            actorService.saveActor(actor);
+            return new ResponseEntity<>(actor, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/{id}")

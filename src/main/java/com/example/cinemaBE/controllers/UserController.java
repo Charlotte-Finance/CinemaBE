@@ -1,5 +1,6 @@
 package com.example.cinemaBE.controllers;
 
+import com.example.cinemaBE.domains.Movie;
 import com.example.cinemaBE.domains.User;
 import com.example.cinemaBE.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +34,19 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public void add(@RequestBody User user) {
-        userService.saveUser(user);
+    public ResponseEntity<User> add(@RequestBody User user) {
+        try {
+            userService.saveUser(user);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody Map<String, String> userData) {
         try {
-            User user = userService.getUserByLogin(userData.get("username"),userData.get("password"));
+            User user = userService.getUserByLogin(userData.get("username"), userData.get("password"));
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -59,7 +65,6 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 
 
     @DeleteMapping("/{id}")

@@ -1,5 +1,6 @@
 package com.example.cinemaBE.controllers;
 
+import com.example.cinemaBE.domains.Director;
 import com.example.cinemaBE.domains.Like;
 import com.example.cinemaBE.services.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,10 +55,14 @@ public class LikeController {
     }
 
     @PostMapping("/")
-    public void add(@RequestBody Like like) {
-        likeService.saveLike(like);
+    public ResponseEntity<Like> add(@RequestBody Like like) {
+        try {
+            likeService.saveLike(like);
+            return new ResponseEntity<>(like, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody Like like, @PathVariable Integer id) {

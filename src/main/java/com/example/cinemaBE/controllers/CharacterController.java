@@ -34,14 +34,18 @@ public class CharacterController {
     }
 
     @PostMapping("/")
-    public void add(@RequestBody Character character) {
-        characterService.saveCharacter(character);
+    public ResponseEntity<Character> add(@RequestBody Character character) {
+        try {
+            characterService.saveCharacter(character);
+            return new ResponseEntity<>(character, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody Character character, @PathVariable int id) {
         try {
-            Character existCharacter = characterService.getCharacter(id);
             character.setId(id);
             characterService.saveCharacter(character);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -59,6 +63,7 @@ public class CharacterController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         characterService.deleteCharacter(id);
