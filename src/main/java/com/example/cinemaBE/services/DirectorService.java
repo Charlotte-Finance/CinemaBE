@@ -18,15 +18,15 @@ public class DirectorService {
         return directorRepository.findAll();
     }
 
-    public void saveDirector(Director director) {
-        directorRepository.save(director);
+    public Director saveDirector(Director director) {
+        return directorRepository.save(director);
     }
 
     public Director getDirector(Integer id) {
         return directorRepository.findById(id).get();
     }
 
-    public void deleteDirector(Integer id) {
-        directorRepository.deleteById(id);
+    public void deleteDirector(Director director) {
+        directorRepository.delete(director);
     }
 }

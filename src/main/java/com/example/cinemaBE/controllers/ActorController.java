@@ -1,7 +1,6 @@
 package com.example.cinemaBE.controllers;
 
 import com.example.cinemaBE.domains.Actor;
-import com.example.cinemaBE.domains.Character;
 import com.example.cinemaBE.services.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,27 +44,20 @@ public class ActorController {
     @PostMapping("/")
     public ResponseEntity<Actor> add(@RequestBody Actor actor) {
         try {
-            actorService.saveActor(actor);
+            return new ResponseEntity<>(actorService.saveActor(actor), HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    @PostMapping("/delete/")
+    public ResponseEntity<Actor> delete(@RequestBody Actor actor) {
+        try {
+            actorService.deleteActor(actor);
             return new ResponseEntity<>(actor, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody Actor actor, @PathVariable Integer id) {
-        try {
-            Actor existActor = actorService.getActor(id);
-            actor.setId(id);
-            actorService.saveActor(actor);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        actorService.deleteActor(id);
     }
 }

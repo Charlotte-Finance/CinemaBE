@@ -18,16 +18,16 @@ public class CharacterService {
         return characterRepository.findAll();
     }
 
-    public void saveCharacter(Character character) {
-        characterRepository.save(character);
+    public Character saveCharacter(Character character) {
+        return characterRepository.save(character);
     }
 
     public Character getCharacter(Integer id) {
         return characterRepository.findById(id).get();
     }
 
-    public void deleteCharacter(Integer id) {
-        characterRepository.deleteById(id);
+    public void deleteCharacter(Character character) {
+        characterRepository.delete(character);
     }
 
     public List<Character> getCharactersByMovie(Integer movieId) {

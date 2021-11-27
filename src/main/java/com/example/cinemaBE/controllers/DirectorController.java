@@ -1,6 +1,7 @@
 package com.example.cinemaBE.controllers;
 
 import com.example.cinemaBE.domains.Category;
+import com.example.cinemaBE.domains.Character;
 import com.example.cinemaBE.domains.Director;
 import com.example.cinemaBE.services.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,26 +36,21 @@ public class DirectorController {
     @PostMapping("/")
     public ResponseEntity<Director> add(@RequestBody Director director) {
         try {
-            directorService.saveDirector(director);
-            return new ResponseEntity<>(director, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody Director director, @PathVariable Integer id) {
-        try {
-            Director existDirector = directorService.getDirector(id);
-            director.setId(id);
-            directorService.saveDirector(director);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(directorService.saveDirector(director), HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        directorService.deleteDirector(id);
+
+
+    @PostMapping("/delete/")
+    public ResponseEntity<Director> delete(@RequestBody Director director) {
+        try {
+            directorService.deleteDirector(director);
+            return new ResponseEntity<>(director, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

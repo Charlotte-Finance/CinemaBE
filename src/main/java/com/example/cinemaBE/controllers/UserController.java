@@ -1,5 +1,6 @@
 package com.example.cinemaBE.controllers;
 
+import com.example.cinemaBE.domains.Director;
 import com.example.cinemaBE.domains.Movie;
 import com.example.cinemaBE.domains.User;
 import com.example.cinemaBE.services.UserService;
@@ -36,31 +37,18 @@ public class UserController {
     @PostMapping("/")
     public ResponseEntity<User> add(@RequestBody User user) {
         try {
-            userService.saveUser(user);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody Map<String, String> userData) {
         try {
             User user = userService.getUserByLogin(userData.get("username"), userData.get("password"));
             return new ResponseEntity<>(user, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody User user, @PathVariable Integer id) {
-        try {
-            User existUser = userService.getUser(id);
-            user.setId(id);
-            userService.saveUser(user);
-            return new ResponseEntity<>(HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

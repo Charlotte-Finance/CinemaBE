@@ -1,6 +1,5 @@
 package com.example.cinemaBE.controllers;
 
-import com.example.cinemaBE.domains.Like;
 import com.example.cinemaBE.domains.Movie;
 import com.example.cinemaBE.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,27 +44,20 @@ public class MovieController {
     @PostMapping("/")
     public ResponseEntity<Movie> add(@RequestBody Movie movie) {
         try {
-            Movie postMovie = movieService.saveMovie(movie);
-            return new ResponseEntity<>(postMovie, HttpStatus.OK);
+            return new ResponseEntity<>(movieService.saveMovie(movie), HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody Movie movie, @PathVariable Integer id) {
+
+    @PostMapping("/delete/")
+    public ResponseEntity<Movie> delete(@RequestBody Movie movie) {
         try {
-            Movie existMovie = movieService.getMovie(id);
-            movie.setId(id);
-            movieService.saveMovie(movie);
-            return new ResponseEntity<>(HttpStatus.OK);
+            movieService.deleteMovie(movie);
+            return new ResponseEntity<>(movie, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        movieService.deleteMovie(id);
     }
 }

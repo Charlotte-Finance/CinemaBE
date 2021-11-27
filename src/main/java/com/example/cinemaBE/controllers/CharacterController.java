@@ -36,19 +36,7 @@ public class CharacterController {
     @PostMapping("/")
     public ResponseEntity<Character> add(@RequestBody Character character) {
         try {
-            characterService.saveCharacter(character);
-            return new ResponseEntity<>(character, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody Character character, @PathVariable int id) {
-        try {
-            character.setId(id);
-            characterService.saveCharacter(character);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(characterService.saveCharacter(character), HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -64,8 +52,14 @@ public class CharacterController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        characterService.deleteCharacter(id);
+
+    @PostMapping("/delete/")
+    public ResponseEntity<Character> delete(@RequestBody Character character) {
+        try {
+            characterService.deleteCharacter(character);
+            return new ResponseEntity<>(character, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

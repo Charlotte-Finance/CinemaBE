@@ -23,16 +23,16 @@ public class ActorService {
         return actorRepository.findAll();
     }
 
-    public void saveActor(Actor actor) {
-        actorRepository.save(actor);
+    public Actor saveActor(Actor actor) {
+        return actorRepository.save(actor);
     }
 
     public Actor getActor(Integer id) {
         return actorRepository.findById(id).get();
     }
 
-    public void deleteActor(Integer id) {
-        actorRepository.deleteById(id);
+    public void deleteActor(Actor actor) {
+        actorRepository.delete(actor);
     }
 
     public List<Actor> getActorsByMovieId(int movieId) {

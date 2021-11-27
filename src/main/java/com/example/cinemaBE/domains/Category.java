@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class Category {
     private String code;
     private String label;
-    private String picture;
 
 
     @Id
@@ -27,15 +26,6 @@ public class Category {
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    @Basic
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 
 }
