@@ -43,16 +43,6 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("/{code}")
-    public ResponseEntity<?> update(@RequestBody Category category, @PathVariable String code) {
-        try {
-            category.setCode(code);
-            categoryService.saveCategory(category);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String code) {

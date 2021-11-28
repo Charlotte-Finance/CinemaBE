@@ -46,6 +46,6 @@ public class MovieService {
     }
 
     public void deleteMovie(Movie movie) {
-        movieRepository.delete(movie);
+        movieRepository.deleteById(movie.getId());
     }
 }

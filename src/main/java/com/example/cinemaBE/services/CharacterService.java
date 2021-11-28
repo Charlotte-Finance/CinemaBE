@@ -27,7 +27,7 @@ public class CharacterService {
     }
 
     public void deleteCharacter(Character character) {
-        characterRepository.delete(character);
+        characterRepository.deleteById(character.getId());
     }
 
     public List<Character> getCharactersByMovie(Integer movieId) {

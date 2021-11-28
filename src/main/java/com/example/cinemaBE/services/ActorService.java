@@ -32,7 +32,7 @@ public class ActorService {
     }
 
     public void deleteActor(Actor actor) {
-        actorRepository.delete(actor);
+        actorRepository.deleteById(actor.getId());
     }
 
     public List<Actor> getActorsByMovieId(int movieId) {
