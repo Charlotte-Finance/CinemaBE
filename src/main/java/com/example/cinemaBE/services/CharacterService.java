@@ -34,4 +34,7 @@ public class CharacterService {
         return characterRepository.findByMovieId(movieId);
     }
 
+    public List<Character> getCharactersByActor(Integer actorId) {
+        return characterRepository.findByActorId(actorId);
+    }
 }

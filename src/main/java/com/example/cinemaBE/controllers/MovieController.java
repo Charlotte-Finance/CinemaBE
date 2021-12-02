@@ -50,6 +50,15 @@ public class MovieController {
         }
     }
 
+    @GetMapping("/by-director")
+    public ResponseEntity<List<Movie>> byDirector(@RequestParam Integer directorId) {
+        try {
+            List<Movie> movies = movieService.getMoviesByDirector(directorId);
+            return new ResponseEntity<>(movies, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @PostMapping("/delete/")
     public ResponseEntity<Movie> delete(@RequestBody Movie movie) {

@@ -1,7 +1,5 @@
 package com.example.cinemaBE.controllers;
 
-import com.example.cinemaBE.domains.Category;
-import com.example.cinemaBE.domains.Character;
 import com.example.cinemaBE.domains.Director;
 import com.example.cinemaBE.services.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;

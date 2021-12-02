@@ -1,7 +1,6 @@
 package com.example.cinemaBE.services;
 
 import com.example.cinemaBE.domains.Category;
-import com.example.cinemaBE.domains.Character;
 import com.example.cinemaBE.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

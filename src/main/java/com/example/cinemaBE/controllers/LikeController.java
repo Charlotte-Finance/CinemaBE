@@ -1,6 +1,5 @@
 package com.example.cinemaBE.controllers;
 
-import com.example.cinemaBE.domains.Director;
 import com.example.cinemaBE.domains.Like;
 import com.example.cinemaBE.services.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 @RestController

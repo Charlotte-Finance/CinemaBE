@@ -12,4 +12,6 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     List<Movie> findByCategoryCode(String categoryCode);
 
+    List<Movie> findByDirectorId(int directorId);
+
 }

@@ -1,7 +1,6 @@
 package com.example.cinemaBE.controllers;
 
 
-import com.example.cinemaBE.domains.Actor;
 import com.example.cinemaBE.domains.Character;
 import com.example.cinemaBE.services.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +51,16 @@ public class CharacterController {
         }
     }
 
+
+    @GetMapping("/by-actor")
+    public ResponseEntity<List<Character>> byActor(@RequestParam Integer actorId) {
+        try {
+            List<Character> characters = characterService.getCharactersByActor(actorId);
+            return new ResponseEntity<>(characters, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @PostMapping("/delete/")
     public ResponseEntity<Character> delete(@RequestBody Character character) {

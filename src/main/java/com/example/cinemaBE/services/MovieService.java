@@ -2,7 +2,6 @@ package com.example.cinemaBE.services;
 
 import com.example.cinemaBE.domains.Like;
 import com.example.cinemaBE.domains.Movie;
-import com.example.cinemaBE.domains.User;
 import com.example.cinemaBE.repositories.LikeRepository;
 import com.example.cinemaBE.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -47,5 +45,9 @@ public class MovieService {
 
     public void deleteMovie(Movie movie) {
         movieRepository.deleteById(movie.getId());
+    }
+
+    public List<Movie> getMoviesByDirector(Integer directorId) {
+        return movieRepository.findByDirectorId(directorId);
     }
 }

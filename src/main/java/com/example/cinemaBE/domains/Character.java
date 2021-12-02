@@ -1,7 +1,6 @@
 package com.example.cinemaBE.domains;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "characters")

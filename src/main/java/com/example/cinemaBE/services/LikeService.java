@@ -1,7 +1,6 @@
 package com.example.cinemaBE.services;
 
 import com.example.cinemaBE.domains.Like;
-import com.example.cinemaBE.domains.User;
 import com.example.cinemaBE.repositories.LikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
